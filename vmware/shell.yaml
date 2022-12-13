@@ -1,13 +1,25 @@
-- name: Change user password in the guest machine
-  community.vmware.vmware_vm_shell:
-    hostname: "{{ vcenter_hostname }}"
-    username: "{{ vcenter_username }}"
-    password: "{{ vcenter_password }}"
-    datacenter: "{{ datacenter }}"
-    folder: "/{{datacenter}}/vm"
-    vm_id: "{{ vm_name }}"
-    vm_username: sample
-    vm_password: old_password
-    vm_shell: "/bin/echo"
-    vm_shell_args: "-e 'old_password\nnew_password\nnew_password' | passwd sample > /tmp/$$.txt 2>&1"
-  delegate_to: localhost
+---
+- name: tests
+  hosts: all
+  gather_facts: no
+  
+  vars:
+    vm_name: testing-vYOS-0
+
+  vars_files:
+    - .majikmike
+
+  tasks:
+    - name: Change user password in the guest machine
+      community.vmware.vmware_vm_shell:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        datacenter: "{{ datacenter }}"
+        folder: "/{{datacenter}}/vm"
+        vm_id: "{{ vm_name }}"
+        vm_username: vyos
+        vm_password: vyos
+        vm_shell: "source /opt/vyatta/etc/functions/script-template"
+        vm_shell_args: "set system domain-name integrate.zone"
+      delegate_to: localhost
