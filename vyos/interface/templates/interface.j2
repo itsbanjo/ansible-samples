@@ -1,0 +1,7 @@
+{% for iftype, subdata in router.interfaces.items() -%}
+{% for param, value in subdata.items() -%}
+# param: {{ param }} value: {{ value.description }}
+set interface {{ iftype }} {{ param }} description {{ value.description }}
+set interface {{ iftype }} {{ param }} address {{ value.address }}/{{ value.mask }}
+{% endfor %}
+{% endfor %}

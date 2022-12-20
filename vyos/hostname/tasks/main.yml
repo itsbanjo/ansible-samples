@@ -1,0 +1,19 @@
+---
+# tasks file for hostname
+# - name: Set hostname
+#  vyos_system:
+#    host_name: "{{ router.host_name }}"
+#    domain_name: "{{ router.domain_name }}"
+#  with_dict: "{{ router }}"
+
+- name: Apply host_name
+  vyos.vyos.vyos_system:
+    host_name: "{{ router.host_name }}"
+    domain_name: "{{ default.domain_name }}"
+  when: default.domain_name is defined
+
+- name: Set standard banner
+  vyos.vyos.vyos_banner:
+    banner: pre-login
+    text: "{{ default.banner }}"
+    state: present

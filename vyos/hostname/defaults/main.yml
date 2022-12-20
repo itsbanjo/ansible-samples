@@ -1,0 +1,10 @@
+---
+# defaults file for hostname
+
+default:
+  banner: |
+    =====================================================================
+    This is a RESTRICTED system all keystrokes are logged and monitored!!
+    =====================================================================
+
+  domain_name: lab.integrate.zone

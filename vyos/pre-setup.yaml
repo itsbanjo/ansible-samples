@@ -1,0 +1,16 @@
+---
+- name: pre-setup
+  connection: network_cli
+  hosts: testing-vyos0
+  gather_facts: no
+
+  vars:
+    ansible_network_os: vyos
+    ansible_user: vyos
+
+  vars_files:
+    - provision.yaml
+
+  roles:
+    - role: './vyos/hostname'
+    - role: './vyos/interface'

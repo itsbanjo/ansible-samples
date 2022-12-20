@@ -1,0 +1,75 @@
+router:
+  - domain_name: lab.integrate.zone
+  - host_name: testing-vyos0
+    interfaces:
+      dummy:
+        dum0:
+          - description: loopback
+            address: 10.255.100.1
+            mask: /32
+      ethernet:
+        eth0:
+          - description: to public
+            address: 192.168.1.254
+            mask: /24
+        eth1:
+          - description: to uplink vlan99
+            address: 10.200.100.1
+            mask: /29
+        eth2:
+          - description: to infrastructure
+            address: 192.168.2.1
+            mask: /24
+
+  - host_name: testing-vyos1
+    interfaces:
+      dummy:
+        dum0:
+          - description: loopback
+            address: 10.255.100.3
+            mask: /29
+      ethernet:
+        eth0:
+          - description: to uplink vlan99
+            address: 10.200.100.2
+            mask: /30
+        eth1:
+          - vif: 103
+            description: for vlan100
+            address: 172.21.100.1
+            mask: /24
+          - vif: 104
+            description: for vlan101
+            address: 172.21.101.1
+            mask: /24
+          - vif: 105
+            description: for vlan102
+            address: 172.21.102.1
+            mask: /24
+
+
+  - host_name: testing-vyos2
+    interfaces:
+      dummy:
+        dum0:
+          - description: loopback
+            address: 10.255.100.2
+            mask: /32
+      ethernet:
+        eth0:
+          - description: to uplink vlan99
+            address: 10.200.100.2
+            mask: /29
+        eth1:
+          - vif: 103
+            description: for vlan103
+            address: 172.21.103.1
+            mask: /24
+          - vif: 104
+            description: for vlan104
+            address: 172.21.104.1
+            mask: /24
+          - vif: 105
+            description: for vlan105
+            address: 172.21.105.1
+            mask: /24

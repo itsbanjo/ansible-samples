@@ -1,0 +1,5 @@
+[vyos]
+testing-vyos0 ansible_host=172.21.105.200
+testing-vyos1 ansible_host=172.21.105.201
+testing-vyos2 ansible_host=172.21.105.202
+
